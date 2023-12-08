@@ -29,4 +29,4 @@
 
 
 
-# This project is live and will be changes in it
+# This project is alive and will be changes in it
