@@ -16,8 +16,7 @@
 
 ## For get the project we only need clone the repositorie and define java and scala in our ID(In my case I have used intellij)
 
-## For JDBC we have embebed derby database. The dependency is specified in pom.xml and the proccess for get JDBC conecction in our local is in /SparkOctopus/src/main/java/org/example/sources/data/JavaDerbyConn.java
-## We need to change the path of dbUrl in JavaDerbyConn.java and replace for our local path
+## For JDBC we have embebed derby database. The dependency is specified in pom.xml and the proccess for get JDBC conecction in our local is in /SparkOctopus/src/main/java/org/example/sources/data/JavaDerbyConn.java (http://shengwangi.blogspot.com/2015/10/how-to-use-embedded-java-db-derby-in-maven.html)
 
 ## Finaly this project has spark.example folder that contains examples of spark that read from diferent formats
 
