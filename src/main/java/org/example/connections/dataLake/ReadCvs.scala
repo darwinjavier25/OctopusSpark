@@ -2,12 +2,11 @@ package connections.dataLake
 
 import org.apache.spark.sql.functions.{col, expr}
 import org.apache.spark.sql.{DataFrame, SparkSession}
-
 class ReadCvs {
 
-  def setDF(spark: SparkSession): DataFrame = {
+  def setDF(spark: SparkSession, sourcePath: String, file: String): DataFrame = {
 
-    val df = spark.read.option("header", "true").option("inferSchema", "true").csv("/home/dw/Octopus/SparkOctopus/src/main/java/org/example/sources/data/fakefriendsHeader.csv")
+    val df = spark.read.option("header", "true").option("inferSchema", "true").csv(sourcePath + file)
 
     //Get age ander 35
     val under35 = df.filter("age < 35")

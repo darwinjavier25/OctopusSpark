@@ -31,6 +31,7 @@ class sparkCsv {
     df2.printSchema()
     df2.withColumn("age", expr("age + 10")).show()
 
+    spark.stop()
     df2
   }
 }

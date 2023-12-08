@@ -1,10 +1,11 @@
 package connections
 
-import connections.api.{JsonNoSecure, JsonSecure}
-import connections.dataLake.{ReadCvs, ReadTxt}
-import connections.jdbc.ReadLocalJDBC
+import connections.dataLake.ReadCvs
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
+
+import java.io.FileInputStream
+import java.util.Properties
 
 
 object interactiveDF {
@@ -26,18 +27,28 @@ object interactiveDF {
     //jdbcConn.showColumnMysql(spark, "campaigns").show(false)
 
 
+    /*
     println("*******Read from JDBC***********")
     val jdbc = new ReadLocalJDBC
     val jdbcDF = jdbc.dataFromJDBC(spark)
     jdbcDF.show()
     jdbcDF.printSchema()
 
+     */
+
+
+    val props = new Properties()
+    val path = "src/main/resources/config.properties"
+    props.load(new FileInputStream(path))
+    val url = props.getProperty("sources")
+    val archivo = "fakefriendsHeader.csv"
 
     val dataLakeRead = new ReadCvs
-    val fromDataLake = dataLakeRead.setDF(spark)
+    val fromDataLake = dataLakeRead.setDF(spark, url, archivo)
     println("*******Read csv***********")
     fromDataLake.select("*").show(2, false)
 
+    /*
     val wordCount = new ReadTxt
     val df = wordCount.setDF(spark)
     println("*******Read txt***********")
@@ -84,6 +95,8 @@ object interactiveDF {
     val LisTables = new jdbcConn
     val showColumns = LisTables.showColumnMysql(spark, "campaigns")
     showColumns.show(50, false)
+
+     */
 
      */
 

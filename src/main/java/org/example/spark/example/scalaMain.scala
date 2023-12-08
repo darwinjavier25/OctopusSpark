@@ -4,6 +4,7 @@ import org.apache.spark.sql.functions.col
 
 object scalaMain extends App {
 
+  println("Spark here")
   val a1 = new sparkCsv
   val a = a1.listedFakeFriends()
   println("En main")

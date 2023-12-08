@@ -60,31 +60,26 @@
             <version>10.8.3.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.scala-lang/scala-swing -->
-
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-swing</artifactId>
-            <version>2.11.0-M7</version>
-        </dependency>
-
     </dependencies>
 
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>SparkOctopus.scr.main.java.org.example.Main</mainClass>
-                        </manifest>
-                    </archive>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
+            <!-- Otros plugins que puedas necesitar -->
         </plugins>
     </build>
 

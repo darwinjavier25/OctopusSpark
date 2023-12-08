@@ -12,6 +12,7 @@ class dataFrame {
 
   def testClaseDf(): DataFrame = {
     val df = spark.read.text("/home/dw/Octopus/SparkOctopus/src/main/java/org/example/sources/data/Alchemist.txt")
+    spark.stop()
     df
   }
 }
