@@ -80,7 +80,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>SparkOctopus.scr.main.scala.org.example.Main</mainClass> <!-- Aquí debes especificar la clase principal -->
+                            <mainClass>SparkOctopus.scr.main.java.org.example.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

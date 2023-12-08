@@ -370,5 +370,11 @@ spark-warehouse/
 # For SBT
 .jvmopts
 
+# For derby
+derby.log
+
+# For mySql and Postgres conn
+/home/dw/Octopus/SparkOctopus/src/main/java/org/example/connections/jdbc/jdbcConn.scala
+
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,intellij+iml,intellij+all,java,scala,spark,maven
