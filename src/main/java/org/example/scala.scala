@@ -1,6 +1,6 @@
 package org.example
 
-object Scala {
+object scala {
 
   def main(args: Array[String]): Unit = {
     println("Scala here")

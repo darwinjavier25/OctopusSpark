@@ -1,24 +1,31 @@
-package sources
+package org.example.sources
 
-import java.sql.{DriverManager, SQLException}
+import org.apache.spark.sql.{DataFrame, SparkSession}
 
-object SparkDerbyConn {
+class SparkDerbyConn {
 
-  def main(args: Array[String]): Unit = {
-    normalDbUsage()
+  def lisTable(spark: SparkSession): DataFrame = {
+    val url = "jdbc:derby:/home/dw/Octopus/SparkOctopus/src/main/resources/demo"
+    val table = "SYS.SYSTABLES"
+
+    val connectionProperties = new java.util.Properties()
+    connectionProperties.put("user", "")
+    connectionProperties.put("password", "")
+
+    val df = spark.read.jdbc(url, table, connectionProperties)
+    val df2 = df.select("*").where("TABLETYPE = 'T'")
+    df2
   }
-  val dbUrl = "jdbc:derby:/home/dw/Octopus/SparkOctopus/src/main/resources/demo"
-  val conn = DriverManager.getConnection(dbUrl)
 
+  def displaySchema(spark: org.apache.spark.sql.SparkSession, table: String): Unit = {
+    val url = "jdbc:derby:/home/dw/Octopus/SparkOctopus/src/main/resources/demo"
 
-  @throws[SQLException]
-  def normalDbUsage(): Unit = {
+    val connectionProperties = new java.util.Properties()
+    connectionProperties.put("user", "")
+    connectionProperties.put("password", "")
 
-    val stmt = conn.createStatement
-    // query
-    val rs = stmt.executeQuery("SELECT * FROM customers")
-    // print out query result
-    while (rs.next) println(rs.getString("Customer_id"), rs.getString("Item_id"), rs.getString("Amount_spent"))
+    val df = spark.read.jdbc(url, table, connectionProperties)
+    df.printSchema()
   }
 
 }

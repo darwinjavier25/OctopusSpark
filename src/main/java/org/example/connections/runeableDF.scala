@@ -1,14 +1,14 @@
 package connections
 
-import connections.dataLake.ReadCvs
+import connections.api.{JsonNoSecure, JsonSecure}
+import connections.dataLake.{ReadCvs, ReadTxt}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
 import java.io.FileInputStream
 import java.util.Properties
 
-
-object interactiveDF {
+object runeableDF {
 
   def main(args: Array[String]): Unit = {
 
@@ -48,18 +48,19 @@ object interactiveDF {
     println("*******Read csv***********")
     fromDataLake.select("*").show(2, false)
 
-    /*
+
+    val miArchivo = "Alchemist.txt"
     val wordCount = new ReadTxt
-    val df = wordCount.setDF(spark)
+    val df = wordCount.setDF(spark, url, miArchivo)
     println("*******Read txt***********")
     df.select(sum("count").alias("Total")).show()
 
 
     println("*******Read Json Api no secure***********")
-    val url = "https://data.montgomerycountymd.gov/api/views/v76h-r7br/rows.json?accessType=DOWNLOAD"
-    println(url)
+    val apiUrl = "https://data.montgomerycountymd.gov/api/views/v76h-r7br/rows.json?accessType=DOWNLOAD"
+    println(apiUrl)
     val apiJson = new JsonNoSecure
-    val (expl, expl2) = apiJson.fromJson(spark, url)
+    val (expl, expl2) = apiJson.fromJson(spark, apiUrl)
     println("*******Read Json data & meta***********")
     expl.show()
     println("*******Explode Json columns***********")
@@ -69,9 +70,9 @@ object interactiveDF {
 
 
     val token = "tFzaqQPkVK438fX4RphGsEVjZCO7VxgOVEO5yfP3"
-    val url2 = "https://api.nasa.gov/planetary/apod"
+    val apiUrl2 = "https://api.nasa.gov/planetary/apod"
     val jsonSecure = new JsonSecure
-    val dfJson = jsonSecure.authResponse(spark, url2, token)
+    val dfJson = jsonSecure.authResponse(spark, apiUrl2, token)
     println("*******Read Json with Api Key***********")
     dfJson.show(false)
 
@@ -95,8 +96,6 @@ object interactiveDF {
     val LisTables = new jdbcConn
     val showColumns = LisTables.showColumnMysql(spark, "campaigns")
     showColumns.show(50, false)
-
-     */
 
      */
 

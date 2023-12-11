@@ -3,7 +3,7 @@ package spark.example
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
-class sparkCsv {
+class SparkCsv {
 
   def listedFakeFriends(): DataFrame = {
     val spark = SparkSession.builder

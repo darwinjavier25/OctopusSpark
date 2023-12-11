@@ -4,8 +4,8 @@ import org.apache.spark.sql.SparkSession
 
 class CsvIngestion {
 
-  def tableCreate(spark: SparkSession, path: String, tableName: String): Unit = {
-    val df = spark.read.option("header", "true").csv(path)
+  def tableCreate(spark: SparkSession, imputPath: String, imputFile: String, tableName: String): Unit = {
+    val df = spark.read.option("header", "true").csv(imputPath + imputFile)
 
     val connectionProperties = new java.util.Properties()
     connectionProperties.put("user", "")

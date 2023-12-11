@@ -3,9 +3,9 @@ package dataLake.imputCSV
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
 
-class writeCSV {
+class WriteCSV {
 
-  def ingestDF(spark: SparkSession, url: String): Unit = {
+  def ingestDF(spark: SparkSession, sourcePath: String, destinyPath: String, fileImput: String, fileOutput: String): Unit = {
     val schema = StructType(Seq(
       StructField("Id", IntegerType, nullable = false),
       StructField("Company", StringType, nullable = true),
@@ -18,13 +18,11 @@ class writeCSV {
       StructField("Industry", StringType, nullable = true),
       StructField("Company_assessment", StringType, nullable = true)
     ))
-    val df = spark.read.option("header", "false").schema(schema).csv("/home/dw/Octopus/SparkOctopus/src/main/java/org/example/sources/data/clients.csv")
+    val df = spark.read.option("header", "false").schema(schema).csv(sourcePath + fileImput)
     df.write.format("csv")
       .option("header", "true")
       .option("delimiter", ",")
       .mode("overwrite")
-      .save(url)
-    println("Success")
+      .save(destinyPath + fileOutput)
   }
-
 }

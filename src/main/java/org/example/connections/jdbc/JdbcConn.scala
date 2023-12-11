@@ -2,7 +2,7 @@ package connections.jdbc
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class jdbcConn {
+class JdbcConn {
 
   def psqlDF(spark: SparkSession, tableName: String, columns: Seq[String]): DataFrame = {
 

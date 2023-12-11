@@ -2,22 +2,19 @@ package spark.example
 
 import org.apache.spark.sql.functions.col
 
-object scalaMain extends App {
+object runeableObject extends App {
 
   println("Spark here")
-  val a1 = new sparkCsv
+  val a1 = new SparkCsv
   val a = a1.listedFakeFriends()
   println("En main")
   a.count()
 
-  val clasDF = new dataFrame
-
+  val clasDF = new GetDF
   val df = clasDF.testClaseDf()
-
   df.show()
 
-  val fakeFriendsDF = new fakeFriends
-
+  val fakeFriendsDF = new FakeFriends
   println("fakeFriens")
   val df2 = fakeFriendsDF.dataFrame1()
 

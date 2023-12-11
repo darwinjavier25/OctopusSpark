@@ -2,7 +2,7 @@ package spark.example
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class dataFrame {
+class GetDF {
 
   val spark = SparkSession.builder
     .master("local[*]")
