@@ -6,9 +6,9 @@
 
 
 
-# 1. The first tentacle is connectios and focus in get data from api, datalake and jdbc sources
+# 1. The first tentacle is connectios and focus in get data from api, diferent formats and jdbc sources
 # 2. The second tentacle focus in injestion in datalake from diferentes sources and formats of data
-# 3. The third tentacle is sources that focus in read diferents formats of data and convert in data frame for later analisys
+# 3. The third tentacle is sources that focus in read diferents formats of data and convert in data frame for later analysis
 
 
 
