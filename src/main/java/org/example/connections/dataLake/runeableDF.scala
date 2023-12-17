@@ -1,7 +1,6 @@
-package dataLake.imputCSV
+package org.example.connections.dataLake
 
 import org.apache.spark.sql.SparkSession
-import org.example.dataLake.writeParquet
 
 import java.io.FileInputStream
 import java.util.Properties
@@ -31,9 +30,9 @@ object runeableDF {
 
     val setDF = new writeParquet
 
-    //val urlImput = "/home/dw/Octopus/SparkOctopus/src/main/java/org/example/sources/data/test1.json"
-    //val urlOutput = "/home/dw/Octopus/SparkOctopus/src/main/java/org/example/dataLake/parquetFiles/json.parquet"
-    //setDF.getData(spark, urlImput, urlOutput)
+    val urlImput = "/home/dw/Octopus/SparkOctopus/src/main/java/org/example/sources/data/test1.json"
+    val urlOutput = "/home/dw/Octopus/SparkOctopus/src/main/java/org/example/dataLake/parquetFiles/json.parquet"
+    setDF.getData(spark, urlImput, urlOutput)
 
     val parquetFileImput = "test1.json"
     val parquetFileOutput = "json.parquet"

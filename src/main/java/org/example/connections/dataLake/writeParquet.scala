@@ -1,4 +1,4 @@
-package org.example.dataLake
+package org.example.connections.dataLake
 
 import org.apache.spark.sql.SparkSession
 

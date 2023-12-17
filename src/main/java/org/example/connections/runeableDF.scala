@@ -2,6 +2,7 @@ package connections
 
 import connections.api.{JsonNoSecure, JsonSecure}
 import connections.dataLake.{ReadCvs, ReadTxt}
+import connections.jdbc.ReadLocalJDBC
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
@@ -27,14 +28,14 @@ object runeableDF {
     //jdbcConn.showColumnMysql(spark, "campaigns").show(false)
 
 
-    /*
+
     println("*******Read from JDBC***********")
     val jdbc = new ReadLocalJDBC
     val jdbcDF = jdbc.dataFromJDBC(spark)
     jdbcDF.show()
     jdbcDF.printSchema()
 
-     */
+
 
 
     val props = new Properties()
@@ -72,6 +73,8 @@ object runeableDF {
     val token = "tFzaqQPkVK438fX4RphGsEVjZCO7VxgOVEO5yfP3"
     val apiUrl2 = "https://api.nasa.gov/planetary/apod"
     val jsonSecure = new JsonSecure
+    val connSt = jsonSecure.checkConnectionStatus(apiUrl2 + "?api_key=" + token)
+    print(connSt)
     val dfJson = jsonSecure.authResponse(spark, apiUrl2, token)
     println("*******Read Json with Api Key***********")
     dfJson.show(false)

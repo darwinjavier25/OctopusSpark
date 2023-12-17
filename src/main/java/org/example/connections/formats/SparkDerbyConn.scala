@@ -1,4 +1,4 @@
-package org.example.sources
+package org.example.connections.formats
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 

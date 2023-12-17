@@ -1,6 +1,6 @@
-package sources
+package org.example.connections.formats
+
 import org.apache.spark.sql.SparkSession
-import org.example.sources.SparkDerbyConn
 
 object runeable {
 

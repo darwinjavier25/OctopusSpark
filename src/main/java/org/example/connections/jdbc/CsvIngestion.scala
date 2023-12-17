@@ -1,4 +1,4 @@
-package sources
+package org.example.connections.jdbc
 
 import org.apache.spark.sql.SparkSession
 

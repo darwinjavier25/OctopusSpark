@@ -1,4 +1,4 @@
-package sources
+package org.example.connections.formats
 
 import java.sql.{DriverManager, SQLException}
 

@@ -1,4 +1,4 @@
-package org.example.sources.data;
+package org.example.connections.formats.data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
