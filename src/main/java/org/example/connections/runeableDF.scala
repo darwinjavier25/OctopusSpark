@@ -30,8 +30,10 @@ object runeableDF {
 
 
     println("*******Read from JDBC***********")
+    val jdbcUrl = "jdbc:derby:/home/dw/Octopus/SparkOctopus/src/main/resources/demo"
+    val tableName = "customers"
     val jdbc = new ReadLocalJDBC
-    val jdbcDF = jdbc.dataFromJDBC(spark)
+    val jdbcDF = jdbc.dataFromJDBC(spark, jdbcUrl, tableName)
     jdbcDF.show()
     jdbcDF.printSchema()
 

@@ -7,16 +7,16 @@ import org.scalatest.funsuite.AnyFunSuite
 import java.io.FileInputStream
 import java.util.Properties
 
-class ReadTxtTest extends AnyFunSuite {
+class ReadCsvTest extends AnyFunSuite {
 
-  test("Should be return more than one row and 2 columns"){
+  test("Should be return dataframe and num of columns") {
     val spark = SparkSession.builder().master("local[*]").appName("Test").getOrCreate()
 
     val props = new Properties()
     val sourcePath = "src/main/resources/config.properties"
     props.load(new FileInputStream(sourcePath))
     val url = props.getProperty("sources")
-    val archivo = "Alchemist.txt"
+    val archivo = "clients.csv"
 
     val readTxt = new ReadTxt()
 
@@ -24,9 +24,7 @@ class ReadTxtTest extends AnyFunSuite {
 
     assert(resultDF.count() > 0)
     assert(resultDF.columns.length > 1)
-    assert(archivo.contains(".txt"))
-    //assert(resultDF1.isInstanceOf[DataFrame] && resultDF2.isInstanceOf[DataFrame]) // Verifica que ambos sean DataFrames
-    //assert(resultDF1 != null && resultDF2 != null) // Verifica que no sean nulos
+    assert(archivo.contains(".csv"))
 
     spark.stop()
   }
