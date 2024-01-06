@@ -1,7 +1,7 @@
 package connections
 
-import connections.api.{JsonNoSecure, JsonSecure}
-import connections.dataLake.{ReadCvs, ReadTxt}
+import connections.dataLake.{ReadCsv, ReadTxt}
+import connections.jdbc.ReadLocalJDBC
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
@@ -27,14 +27,17 @@ object runeableDF {
     //jdbcConn.showColumnMysql(spark, "campaigns").show(false)
 
 
-    /*
+
+
     println("*******Read from JDBC***********")
+    val jdbcUrl = "jdbc:derby:/home/dw/Octopus/SparkOctopus/src/main/resources/demo"
+    val tableName = "customers"
     val jdbc = new ReadLocalJDBC
-    val jdbcDF = jdbc.dataFromJDBC(spark)
+    val jdbcDF = jdbc.dataFromJDBC(spark, jdbcUrl, tableName)
     jdbcDF.show()
     jdbcDF.printSchema()
 
-     */
+
 
 
     val props = new Properties()
@@ -43,7 +46,7 @@ object runeableDF {
     val url = props.getProperty("sources")
     val archivo = "fakefriendsHeader.csv"
 
-    val dataLakeRead = new ReadCvs
+    val dataLakeRead = new ReadCsv
     val fromDataLake = dataLakeRead.setDF(spark, url, archivo)
     println("*******Read csv***********")
     fromDataLake.select("*").show(2, false)
@@ -56,6 +59,9 @@ object runeableDF {
     df.select(sum("count").alias("Total")).show()
 
 
+
+
+    /*
     println("*******Read Json Api no secure***********")
     val apiUrl = "https://data.montgomerycountymd.gov/api/views/v76h-r7br/rows.json?accessType=DOWNLOAD"
     println(apiUrl)
@@ -72,6 +78,8 @@ object runeableDF {
     val token = "tFzaqQPkVK438fX4RphGsEVjZCO7VxgOVEO5yfP3"
     val apiUrl2 = "https://api.nasa.gov/planetary/apod"
     val jsonSecure = new JsonSecure
+    val connSt = jsonSecure.checkConnectionStatus(apiUrl2 + "?api_key=" + token)
+    print(connSt)
     val dfJson = jsonSecure.authResponse(spark, apiUrl2, token)
     println("*******Read Json with Api Key***********")
     dfJson.show(false)
@@ -96,6 +104,8 @@ object runeableDF {
     val LisTables = new jdbcConn
     val showColumns = LisTables.showColumnMysql(spark, "campaigns")
     showColumns.show(50, false)
+
+     */
 
      */
 
