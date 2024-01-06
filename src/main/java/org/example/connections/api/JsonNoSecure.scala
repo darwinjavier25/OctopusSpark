@@ -1,11 +1,11 @@
 package connections.api
 
-import org.apache.spark.sql.functions.explode
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class JsonNoSecure extends StandartApiRequest {
 
-  def fromJson(spark: SparkSession, url: String): (DataFrame, DataFrame) = {
+  def fromJson(spark: SparkSession, url: String): DataFrame =  //(DataFrame, DataFrame)
+  {
 
     //When you import a implicit scala immediately search for declare implicits and apply this behaviour before of all. In this case is necessary for toDS()
     import spark.implicits._
@@ -17,8 +17,8 @@ class JsonNoSecure extends StandartApiRequest {
     //df.select(col("meta.view.description"))
     //df.select(col("meta.view.columns.name"), col("meta.view.columns.renderTypeName"))
     //df.select(explode(col("meta.view.columns.name")))
-    val explodeDF = df.select(explode($"data") as ("explode_data"))
-    val df2 = explodeDF.select(
+    //val explodeDF = df.select(explode($"data") as ("explode_data"))
+    /*val df2 = explodeDF.select(
       $"explode_data"(0).as("row_id"),
       $"explode_data"(1).as("serial_id"),
       $"explode_data"(2).as("number_of_copies"),
@@ -37,6 +37,8 @@ class JsonNoSecure extends StandartApiRequest {
       $"explode_data"(15).as("track_number"),
       $"explode_data"(16).as("version")
     )
-    (df, df2)
+
+     */
+    df
   }
 }
