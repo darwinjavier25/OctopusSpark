@@ -20,7 +20,7 @@ class WriteCsv {
       StructField("Company_assessment", StringType, nullable = true)
     ))
 
-    val df = spark.read.option("header", "false").schema(schema).csv(sourcePath + fileImput)
+    val df = spark.read.option("header", "true").csv(sourcePath + fileImput)
     df.write.format("csv")
           .option("header", "true")
           .option("delimiter", ",")
