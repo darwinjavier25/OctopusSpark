@@ -1,22 +1,29 @@
 package spark.example
 
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
 
 object runeableObject extends App {
 
+  val spark = SparkSession.builder
+    .master("local[*]")
+    .appName("SparkJoinDataFrames")
+    .getOrCreate()
+  spark.sparkContext.setLogLevel("ERROR")
+
   println("Spark here")
   val a1 = new SparkCsv
-  val a = a1.listedFakeFriends()
+  val a = a1.listedFakeFriends(spark)
   println("En main")
   a.count()
 
-  val clasDF = new GetDF
+  val clasDF = new GetDF(spark)
   val df = clasDF.testClaseDf()
   df.show()
 
   val fakeFriendsDF = new FakeFriends
   println("fakeFriens")
-  val df2 = fakeFriendsDF.dataFrame1()
+  val df2 = fakeFriendsDF.dataFrame1(spark)
 
   df2.select("*").filter(col("age").between(18, 23)).show()
   println(df2.getClass.getName)
@@ -30,4 +37,6 @@ object runeableObject extends App {
   val probabliIncomes = 3000 + 900
 
   println(currentMoney + expectNovember + expectDecember + expectTips + depositRoom + spainMoney + probabliIncomes)
+
+  spark.stop()
 }

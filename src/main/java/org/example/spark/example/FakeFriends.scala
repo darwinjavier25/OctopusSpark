@@ -5,21 +5,13 @@ import org.apache.spark.sql.functions._
 
 class FakeFriends {
 
-  def dataFrame1(): DataFrame = {
+  def dataFrame1(spark: SparkSession): DataFrame = {
 
-    val spark = SparkSession.builder
-      .master("local[*]")
-      .appName("SparkJoinDataFrames")
-      .getOrCreate()
-    spark.sparkContext.setLogLevel("ERROR")
-
-    val df = spark.read.option("header", "true").option("inferSchema", "true").csv("/home/dw/Octopus/SparkOctopus/src/main/java/org/example/sources/data/fakefriendsHeader.csv")
+    val df = spark.read.option("header", "true").option("inferSchema", "true").csv("./src/main/java/org/example/connections/formats/data/fakefriendsHeader.csv")
 
     df.select(col("age"), col("friends")).groupBy("age").avg("friends").sort("age").show()
 
     val dfAvg = df.groupBy("age").agg(round(avg("friends"), 2).alias("roundFriends"))
-
-    spark.stop()
 
     dfAvg
   }

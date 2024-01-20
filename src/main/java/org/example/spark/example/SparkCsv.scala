@@ -5,14 +5,9 @@ import org.apache.spark.sql.functions._
 
 class SparkCsv {
 
-  def listedFakeFriends(): DataFrame = {
-    val spark = SparkSession.builder
-      .master("local[*]")
-      .appName("SparkJoinDataFrames")
-      .getOrCreate()
-    spark.sparkContext.setLogLevel("ERROR")
+  def listedFakeFriends(spark: SparkSession): DataFrame = {
 
-    val df = spark.read.option("header", "true").option("inferSchema", "true").csv("/home/dw/Octopus/SparkOctopus/src/main/java/org/example/sources/data/fakefriendsHeader.csv")
+    val df = spark.read.option("header", "true").option("inferSchema", "true").csv("./src/main/java/org/example/connections/formats/data/fakefriendsHeader.csv")
 
     //printSchema
     df.printSchema()
@@ -30,8 +25,6 @@ class SparkCsv {
     val df2 = df.withColumn("age", col("age").cast("int"))
     df2.printSchema()
     df2.withColumn("age", expr("age + 10")).show()
-
-    spark.stop()
     df2
   }
 }
